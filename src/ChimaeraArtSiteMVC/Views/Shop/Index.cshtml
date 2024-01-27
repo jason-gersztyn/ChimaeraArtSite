@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ChimaeraArtSiteMVC.Models.ProductSeries>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<div style="display:block;">
+    @foreach (var series in Model)
+    {
+
+        <a href="@Url.Action("Product/" + series.ProductSeriesID, "Shop", null)" style="text-decoration:none;">
+            <div class="productCell">
+                <text class="imageText">@series.ProductSeriesName</text>
+                <img src="@Url.Content(series.ProductSeriesImageURL)" alt="X" class="imageThumb" />
+            </div>
+        </a>
+    }
+</div>
+
+<style type="text/css">
+    .imageThumb {
+	    max-width:180px;
+	    width:80%;
+	    clear:both;
+	    display:table;
+	    margin-left:auto;
+	    margin-right:auto;
+    }
+
+    .productCell {
+	    width:20%;
+	    height:220px;
+	    text-align:center;
+	    display:inline-block;
+	    vertical-align:top;
+    }
+</style>

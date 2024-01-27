@@ -1,0 +1,87 @@
+﻿@model Chimaera.Head.Models.CartIndexViewModel
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+@if (Model.cart.Items == null || Model.cart.Items.Length == 0)
+{
+    <h3 style="text-align:center">The truth is out there, but it isn't free. Support the cause, <a href="@Url.Action("Index", "Shop")">buy a shirt.</a></h3>
+    <p style="text-align:center">What do you expect to do here with an empty cart?</p>
+}
+else
+{
+    <div class="text-center">
+        @foreach (var item in Model.cart.Items)
+        {
+            <div class="productCell" style="border:1px solid #999999;margin-top:12px;">
+                <div style="clear:both;">
+                    <img src='@Url.Content(item.Product.ProofURL)' alt='@item.Product.Design.Name' class="imageThumb" style="clear:none;display:inline;" />
+                    <button type="button" class="close" aria-label="Remove" onclick='@("removeitem(" + item.CartItemID.ToString() + ")")' data-toggle="tooltip" title="Remove from cart">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div style="clear:both;border:1px solid #999999">
+                    <p>@item.Size.Name</p>
+                    <p>$@(item.Product.UnitPrice.ToString("0.00")) * @(item.Quantity)</p>
+                    <p>$@(Math.Round(item.Product.UnitPrice * item.Quantity, 2, MidpointRounding.AwayFromZero).ToString("0.00"))</p>
+                </div>
+            </div>
+        }
+    </div>
+    <br />
+    <div style="text-align:center;">
+        <p><strong>Subtotal: $@(Chimaera.Beasts.Service.CartService.CalculateSubtotal(Model.cart).ToString("0.00"))</strong></p>
+        <p class="rainbow" style="text-transform:none !important;height:18px;">
+            @if (Model.cart.DiscountApplied != null)
+            {
+                <strong>
+                    Discount: -$@(Chimaera.Beasts.Service.DiscountService.CalculateDiscount(Model.cart.DiscountApplied,
+                                    Chimaera.Beasts.Service.CartService.CalculateSubtotal(Model.cart)).ToString("0.00"))
+                </strong>
+            }
+        </p>
+    </div>
+    <br />
+    <div class="center-block" style="margin-bottom:25px;text-align:center;">
+        <input id="discount" type="text" class="center-block" style="margin-bottom:5px;" />
+        <input type="button" value="Add Discount" onclick="addDiscount()" class="center-block" style="margin-bottom:5px;" />
+        <p id="discountResult" style="height:18px;text-transform:none !important;" class="rainbow" > </p>
+    </div>
+    <input type="button" value="Checkout" onclick="location.href='@Url.Action("Index", "Checkout")'" class="center-block" />
+}
+
+<script type="text/javascript">
+    function addDiscount() {
+        var discount = $("#discount");
+        var discountResult = $("#discountResult");
+        var discountCode = discount.val();
+
+        $.ajax({
+            url: '/Cart/DiscountAdd',
+            data: { discountCode: discountCode },
+            type: 'POST',
+            datatype: 'json'
+        })
+        .success(function (returnData) {
+            if (returnData.ok) {
+                location.reload();
+            }
+            else {
+                discountResult.text("Not a valid code");
+            }
+        });
+    }
+
+    function removeitem(id) {
+        $.ajax({
+            url: '/Cart/CartRemove',
+            data: { itemId: id },
+            type: 'GET',
+            datatype: 'json'
+        })
+        .success(function () {
+            location.reload();
+        });
+    }
+</script>

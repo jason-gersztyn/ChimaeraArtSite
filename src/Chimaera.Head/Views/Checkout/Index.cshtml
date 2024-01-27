@@ -1,0 +1,96 @@
+﻿@model Chimaera.Head.Models.CheckoutShippingViewModel
+
+@{
+    ViewBag.Title = "Checkout - Shipping Address";
+}
+
+@using (Html.BeginForm())
+{
+    Html.ValidationSummary(true);
+
+    <fieldset>
+        <table style="margin:0px auto;width:100%">
+            <tr>
+                <td></td>
+                <td><h2>Shipping Address</h2></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="label-cell">Email</td>
+                <td class="box-cell">@Html.TextBoxFor(model => model.Email)</td>
+                <td class="validation-cell">@Html.ValidationMessageFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">Name</td>
+                <td class="box-cell">@Html.TextBoxFor(model => model.Name)</td>
+                <td class="validation-cell">@Html.ValidationMessageFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">Street Line 1</td>
+                <td class="box-cell">@Html.TextBoxFor(model => model.Street1)</td>
+                <td class="validation-cell">@Html.ValidationMessageFor(model => model.Street1)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">Street Line 2</td>
+                <td class="box-cell">@Html.TextBoxFor(model => model.Street2)</td>
+                <td class="validation-cell">@Html.ValidationMessageFor(model => model.Street2)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">City</td>
+                <td class="box-cell">@Html.TextBoxFor(model => model.City)</td>
+                <td class="validation-cell">@Html.ValidationMessageFor(model => model.City)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">State/Province/Region</td>
+                <td class="box-cell">@Html.TextBoxFor(model => model.State)</td>
+                <td class="validation-cell">@Html.ValidationMessageFor(model => model.State)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">Country</td>
+                <td class="box-cell">@Html.DropDownListFor(model => model.Country, Model.Countries)</td>
+                <td class="validation-cell">@Html.ValidationMessageFor(model => model.Country)</td>
+            </tr>
+            <tr>
+                <td class="label-cell">Postal Code</td>
+                <td class="box-cell">@Html.TextBoxFor(model => model.Zip)</td>
+                <td class="validation-cell">@Html.ValidationMessageFor(model => model.Zip)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Next" /></td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+<style type="text/css">
+    td {
+        padding-bottom:15px;
+    }
+
+    @@media (min-width:768px)
+    {
+        td {
+            padding-bottom: 7px;
+        }
+    }
+
+    .box-cell {
+        width: 33%;
+    }
+
+        .box-cell input, textarea, select {
+            width: 100%;
+        }
+
+    .label-cell {
+        text-align: right;
+        padding-right: 24px;
+    }
+
+    .validation-cell {
+        padding-left: 24px;
+        width: 33%;
+        color: red;
+    }
+</style>

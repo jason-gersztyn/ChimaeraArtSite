@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Chimaera Conspiracy</title>
+    <link rel="shortcut icon" href="~/favicon.ico" type="image/x-icon" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top device-fixed-height">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle device-fixed-width-right" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand device-fixed-width" style="padding:0px !important">
+                    <img src="@Url.Content("~/Content/Images/Chimaera Brand.png")" alt="Chimaera Conspiracy" style="max-height:50px;height:100%;" />
+                </a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse device-fixed-width">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("FAQs", "FAQs", "Home")</li>
+                    <li>@Html.ActionLink("Shop", "Index", "Shop")</li>
+                    <li>@Html.ActionLink("Cart", "Index", "Cart")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p><a href="https://twitter.com/ChimConspiracy" class="twitter-follow-button" data-show-count="false" data-size="large" data-show-screen-name="false">Follow</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></p>
+            <p class="text-center">&copy; CHIMAERA CONSPIRACY LLC. 2015-2016 <img src="@Url.Content("~/Content/Images/Chimaera Logo Fill.png")" style="width:20px;" /></p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script>
+        function getDeviceScale() {
+            var deviceWidth, landscape = Math.abs(window.orientation) == 90;
+            if (landscape) {
+                // iPhone OS < 3.2 reports a screen height of 396px
+                deviceWidth = Math.max(480, screen.height);
+            } else {
+                deviceWidth = screen.width;
+            }
+            return window.innerWidth / deviceWidth;
+        }
+
+        // mobile only - keep the position:fixed header at constant size when page is zoomed
+        if (navigator.userAgent.match(/Mobi/)) {
+            $(window).on('load scroll', function () {
+                var ds = getDeviceScale();
+                $('.device-fixed-height').css('transform', 'scale(1,' + ds + ')')
+                    .css('transform-origin', '0 0');
+                $('.device-fixed-width').css('transform', 'scale(' + ds + ',1)')
+                    .css('transform-origin', '0 0');
+                $('.device-fixed-width-right').css('transform', 'scale(' + ds + ',1)')
+                    .css('transform-origin', '100 100');
+            })
+        }
+    </script>
+</body>
+</html>

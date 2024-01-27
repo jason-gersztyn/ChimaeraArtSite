@@ -1,0 +1,12 @@
+﻿@model Chimaera.Head.Models.CheckoutCompleteViewModel
+
+@{
+    ViewBag.Title = "Order #" + Model.order.OrderID;
+}
+
+<h1>Order #@(Model.order.OrderID)</h1>
+
+<h2>Thank you!</h2>
+
+<p>Your order has been successfully placed, you should see a confirmation email with order specific details included in the next 5 minutes. If you don't see this email,
+    try checking your junk folder just in case.</p>

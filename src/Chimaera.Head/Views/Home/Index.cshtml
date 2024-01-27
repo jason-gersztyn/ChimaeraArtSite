@@ -1,0 +1,37 @@
+﻿@model Chimaera.Head.Models.HomeIndexViewModel
+
+@{
+    ViewBag.Title = "Home";
+}
+
+<div class="row text-center">
+    <img src="@Url.Content("~/Content/Images/Chimaera Logotype.png")" alt="Chimaera Conspiracy" style="width:50%" />
+</div>
+<br />
+<div class="row">
+    <div class="blockCenter">
+        <h3>What's In Stock</h3>
+        <p>
+            @foreach (var product in Model.ProductBag)
+            {
+                <a href="@Url.Action("Product/" + product.Design.SeriesID, "Shop")" style="text-decoration:none;">
+                    <div class="productCell" style="width:18%;">
+                        <img src="@Url.Content(product.ProofURL)" alt="@product.Design.Name - @product.Color.Name" class="imageThumb" />
+                        @if (product.DateCreated.AddDays(15) >= DateTime.UtcNow)
+                        {
+                            <p class="rainbow">New</p>
+                        }
+                    </div>
+                </a>
+            }
+        </p>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" style="padding-bottom:12px;">
+        <div class="blockCenter">
+            <h3>Latest Comic</h3>
+            <p class="rainbow">Coming soon...</p>
+        </div>
+    </div>
+</div>

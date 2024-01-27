@@ -1,0 +1,12 @@
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\bin\Debug\Chimaera.Body.exe.config
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\bin\Debug\Chimaera.Body.exe
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\bin\Debug\Chimaera.Body.pdb
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.csprojAssemblyReference.cache
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.Home.resources
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.Properties.Resources.resources
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.SeriesCreate.resources
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.SeriesEdit.resources
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.SeriesSelect.resources
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.csproj.GenerateResource.cache
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.exe
+C:\Users\omgst\source\repos\ChimaeraArtSite\Chimaera.Body\obj\Debug\Chimaera.Body.pdb

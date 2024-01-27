@@ -1,0 +1,293 @@
+﻿@{
+    ViewBag.Title = "FAQs";
+}
+
+<div class="container">
+    <h1>Frequently Asked Questions</h1>
+
+    <h4>We have the answers you seek, but can you handle the truth?</h4>
+
+    <br />
+
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        If you have any questions this is your first stop. If you cannot find an answer to your question make sure to contact us at support@chimaeraconspiracy.com.
+    </div>
+
+    <div class="panel-group" id="accordion">
+        <div class="faqHeader">General</div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Do I need to register an account?</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    No you do not, we understand what a pain it is to have to register a new account. You shouldn't need an account to keep track of your order,
+                    all necessary details to access your order history and status will be made readily available to you in a secure anonymous fashion.
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEight">Can I recommend new products/designs?</a>
+                </h4>
+            </div>
+            <div id="collapseEight" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Absolutely! We're open to suggestions for what you'd like to see more of, whether it be a specific animal or theme for a new design 
+                    or a new shirt color you'd like to see an existing design on. You can grab our ears via our Twitter handle or through our support
+                    email, support@chimaeraconspiracy.com.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordion">
+        <div class="faqHeader">Shop</div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">How does it all work?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Like most web stores you pick items and put them in a cart, then proceed through checkout. This process proceeds as follows:
+                    <br />
+                    <br />
+                    <ol>
+                        <li>We ask for your shipping address, this is used to calculate the cost of shipping as well as, of course, shipping the order to you.</li>
+                        <li>Once a valid shipping address is entered we redirect you to Paypal to enter your payment details. We have no access to those details 
+                            nor do we wish to, we let the pros at Paypal handle all that.</li>
+                        <li>After entering your payment information you are redirected back to a confirmation page where you're able to see your order summary.
+                            This is so you can confirm the details of your order and see the grand total before agreeing.</li>
+                        <li>The order is then stored as "Pending" on our end until our tracker confirms the Paypal transaction is complete. A confirmation email
+                            is sent to you.</li>
+                        <li>When the Paypal transaction is complete we send the order request to our printers and update it as "Processing" on our end.</li>
+                        <li>The order should be printed and shipped in roughly a week, once it ships you will receive a follow-up email containing tracking information.</li>
+                        <li>Your order should arrive within 1-2 weeks, on average, from you placing the order.</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">How do I check my order status?</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    After placing your order you should receive a confirmation email in the format of "chimaeraconspiracy.com/checkout/history/{Your unique and secret order identifier here}"
+                    which will bring you a summary of your order and its progress through our system. This should contain details concerning the items ordered, shipping address,
+                    totals calculated, current order status, and even tracking information if the order is shipped.
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">What if I want to cancel?</a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Once an order's status proceeds to "Processing", the request has been sent up to our printers. At this stage we're unable to cancel the order as the items have already
+                    been paid for and are being created. You are however able to make a return by mailing it to us within 30 days of placing the order, just be sure to email us at
+                    support@chimaeraconspiracy.com first so we can begin the return process proper.
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseNine">What if my shirt doesn't come out right?</a>
+                </h4>
+            </div>
+            <div id="collapseNine" class="panel-collapse collapse">
+                <div class="panel-body">
+                    If you're able to provide proof of the shirt's damage or misprint, either by picture or by mailing it in, we can offer a free replacement or simply reimburse you in full
+                    for the order, buyer's choice. No hidden fees or shipping charges here!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel-group" id="accordion">
+        <div class="faqHeader">Shipping</div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFive">What shipping options are avilable?</a>
+                </h4>
+            </div>
+            <div id="collapseFive" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Only basic shipping here, we do not have options for expedited or over-night shipping currently. We do handle international orders, since we are based in
+                    the USA orders outside the country will have slightly higher shipping charges.
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSix">How is shipping calculated?</a>
+                </h4>
+            </div>
+            <div id="collapseSix" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Shipping is based on three factors: Destination shipping country, the product type, and the number of items in the order. A brief break-down follows as such:
+
+                    <ul>
+                        <li>
+                            <h4>USA (Single T-Shirt)</h4>
+                            <table>
+                                <tr>
+                                    <th>Product Type</th>
+                                    <th>1st Item</th>
+                                    <th>Additional</th>
+                                </tr>
+                                <tr>
+                                    <td>T-shirts</td>
+                                    <td>$3.50</td>
+                                    <td>N/A</td>
+                                </tr>
+                                <tr>
+                                    <td>Sweatshirts</td>
+                                    <td>N/A</td>
+                                    <td>N/A</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <h4>USA</h4>
+                            <table>
+                                <tr>
+                                    <th>Product Type</th>
+                                    <th>1st Item</th>
+                                    <th>Additional</th>
+                                </tr>
+                                <tr>
+                                    <td>T-shirts</td>
+                                    <td>$5.50</td>
+                                    <td>$0.75</td>
+                                </tr>
+                                <tr>
+                                    <td>Sweatshirts</td>
+                                    <td>$8.00</td>
+                                    <td>$1.00</td>
+                                </tr>
+                            </table>
+                        </li>
+                        <li>
+                            <h4>Canadian</h4>
+                            <table>
+                                <tr>
+                                    <th>Product Type</th>
+                                    <th>1st Item</th>
+                                    <th>Additional</th>
+                                </tr>
+                                <tr>
+                                    <td>T-shirts</td>
+                                    <td>$8.00</td>
+                                    <td>$1.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Sweatshirts</td>
+                                    <td>$10.00</td>
+                                    <td>$2.00</td>
+                                </tr>
+                            </table>
+                        </li>
+
+                        <li>
+                            <h4>International (Non-Canadian)</h4>
+                            <table>
+                                <tr>
+                                    <th>Product Type</th>
+                                    <th>1st Item</th>
+                                    <th>Additional</th>
+                                </tr>
+                                <tr>
+                                    <td>T-shirts</td>
+                                    <td>$12.00</td>
+                                    <td>$1.00</td>
+                                </tr>
+                                <tr>
+                                    <td>Sweatshirts</td>
+                                    <td>$15.00</td>
+                                    <td>$2.00</td>
+                                </tr>
+                            </table>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">When does my order ship?</a>
+                </h4>
+            </div>
+            <div id="collapseSeven" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Typically your order should ship roughly within a week of you placing the order but life can be unexpected and there may be delays. You can
+                    always check the status of your order through the history link provided in your confirmation email but if it remains unshipped for longer
+                    than a week feel free to reach out to us at support@chimaeraconspiracy.com and we'll be glad to let you know where our printer is at with
+                    the items.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    td, 
+    th {
+	    border:1px solid black;
+	    padding:0px 10px;
+    }
+
+    .faqHeader {
+        font-size: 27px;
+        margin: 20px;
+    }
+
+    .panel-heading [data-toggle="collapse"]:after {
+        font-family: 'Glyphicons Halflings';
+        content: "\e072"; /* "play" icon */
+        float: right;
+        color: #F58723;
+        font-size: 18px;
+        line-height: 22px;
+        /* rotate "play" icon from > (right arrow) to down arrow */
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+
+    .panel-heading [data-toggle="collapse"].collapsed:after {
+        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+        color: #454444;
+    }
+</style>

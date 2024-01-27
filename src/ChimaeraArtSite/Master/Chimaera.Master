@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Chimaera.master.cs" Inherits="ChimaeraArtSite.Master.Chimaera" %>
+
+<%@ Register Src="~/Controls/NavMenu.ascx" TagName="NavMenu" TagPrefix="CA" %>
+<%@ Register Src="~/Controls/Header.ascx" TagName="Header" TagPrefix="CA" %>
+<%@ Register Src="~/Controls/Footer.ascx" TagName="Footer" TagPrefix="CA" %>
+<%@ Register Src="~/Controls/ShopSidebar.ascx" TagName="Sidebar" TagPrefix="CA" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <script type="text/javascript" src="../Scripts/jquery-2.1.4.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.unobtrusive-ajax.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Styles/ChimaeraStyle.css" media="screen" runat="server" />
+    <link rel="shortcut icon" href="../Images/Icons/favicon.ico">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <CA:Header ID="header" runat="server" />
+            <div class="mainContent">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+                <CA:Footer ID="footer" runat="server" />
+            </div>
+        </div>
+    </form>
+</body>
+</html>

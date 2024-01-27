@@ -1,0 +1,172 @@
+﻿@model Chimaera.Head.Models.ShopProductViewModel
+
+@{
+    ViewBag.Title = Model.series.Name;
+}
+
+<input id="productSelection" type="hidden" value="@Model.series.Products[0].ProductID" />
+
+<table>
+    <tr>
+        <td class="productPreview">
+            <div class="img-wrapper">
+                <img id="productProof" class="imagePreview img-responsive" src="@Model.series.Products[0].ProofURL" />
+            </div>
+        </td>
+        <td class="productDetail">
+            <div>
+                <h2 id="productName">@Model.series.Products[0].Design.Name</h2>
+                <h3 id="productColor">@Model.series.Products[0].Color.Name</h3>
+                <h3 id="productPrice">$@Model.series.Products[0].UnitPrice.ToString("0.00")</h3>
+                <hr />
+                Size:
+                <select id="productSizes">
+                    @foreach (var size in Model.series.Products[0].Sizes)
+                    {
+                        <option value="@size.SizeID">@size.Name</option>
+                    }
+                </select>
+                <hr />
+                <p id="productDescription">@Model.series.Products[0].Design.Description</p>
+                <br />
+                <input id="btnAdd" type="button" onclick="add()" value="Add to Cart" />
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div style="display:block">
+    @foreach (var genreRow in Model.series.Products.GroupBy(x => x.Type.Genre))
+    {
+        foreach (var designRow in genreRow.ToList().GroupBy(x => x.Design.DesignID))
+        {
+            foreach (var Product in designRow.ToList())
+            {
+                <a style="text-decoration:none" onclick='@("select(" + Json.Encode(Product) + ")")'>
+                    <div class="variationCell">
+                        <div class="img-wrapper">
+                            <img class="variationThumb img-responsive" src="@Product.ProofURL" />
+                        </div>
+                        <div class="imageText">$@Product.UnitPrice.ToString("0.00")</div>
+                    </div>
+                </a>
+            }
+            <br />
+        }
+    }
+</div>
+
+<script type="text/javascript">
+    function add() {
+        var s = $("#productSelection");
+        var product = s.val();
+
+        var e = document.getElementById("productSizes");
+        var size = e.options[e.selectedIndex].value;
+
+        $.ajax({
+            url: '/Cart/CartInsert',
+            data: { productId: product, sizeId: size },
+            type: 'GET',
+            datatype: 'json'
+        })
+        .success(function () {
+            window.location.href = '@Url.Action("Index", "Cart")';
+        });
+    }
+
+    function select(product) {
+        var productSelection = $("#productSelection");
+        productSelection.val(product.ProductID);
+
+        var productItem = $("#productProof");
+        var productName = $("#productName");
+        var productColor = $("#productColor");
+        var productPrice = $("#productPrice");
+        var productSizes = $("#productSizes");
+        var productDescription = $("#productDescription");
+
+        productName.text(product.Design.Name);
+        productColor.text(product.Color.Name)
+        productItem.attr("src", product.ProofURL);
+        productPrice.text('$' + product.UnitPrice.toFixed(2));
+
+        productSizes.empty();
+        var arraylength = product.Sizes.length;
+        for (var i = 0; i < arraylength; i++) {
+            productSizes.append($("<option></option>").val(product.Sizes[i].SizeID).html(product.Sizes[i].Name))
+        }
+    }
+</script>
+
+<style type="text/css">
+    .img-wrapper {
+        display: inline-block;
+        overflow: hidden;
+    }
+
+    .img-wrapper img {
+        -webkit-transition: all .5s ease;
+        -moz-transition: all .5s ease;
+        -ms-transition: all .5s ease;
+        -o-transition: all .5s ease;
+        transition: all .5s ease;
+        vertical-align: middle;
+    }
+
+    .img-wrapper img:hover {
+        transform:scale(1.5);
+        -ms-transform:scale(1.5); /* IE 9 */
+        -moz-transform:scale(1.5); /* Firefox */
+        -webkit-transform:scale(1.5); /* Safari and Chrome */
+        -o-transform:scale(1.5); /* Opera */
+    }
+
+    .imagePreview {
+        max-width: 580px;
+        max-height: 670px;
+        width: 100%;
+        display: table;
+        clear: both;
+    }
+
+    .imageText {
+        font-size: 10px;
+    }
+
+    .productDetail {
+        width: 50%;
+        padding-left: 15px;
+        vertical-align: top;
+        text-align: left;
+    }
+
+    .productPreview {
+        width: 50%;
+    }
+
+    .variationCell {
+        width: 10%;
+        text-align: center;
+        display: inline-block;
+        vertical-align: top;
+        padding-top:8px;
+    }
+
+    .variationThumb {
+        max-width: 75px;
+        max-height: 75px;
+        width: 80%;
+        clear: both;
+        display: table;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    @@media (min-width:768px)
+    {
+        .imageText {
+            font-size:16px;
+        }
+    }
+</style>

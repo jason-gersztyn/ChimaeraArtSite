@@ -1,0 +1,156 @@
+﻿@model Chimaera.Head.Models.CheckoutHistoryViewModel
+
+@{
+    ViewBag.Title = "Order #" + Model.order.OrderID;
+}
+
+@if (Model.order != null)
+{
+    decimal subtotal = Chimaera.Beasts.Service.QuoteService.CalculateSubtotal(Model.order.Quote);
+    decimal discount = 0;
+    if (Model.order.Quote.Discount != null)
+    {
+        discount = Chimaera.Beasts.Service.DiscountService.CalculateDiscount(Model.order.Quote.Discount, subtotal);
+    }
+    decimal total = Math.Round(subtotal - discount + Model.order.Quote.ShippingCharge.Value, 2, MidpointRounding.AwayFromZero);
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="invoice-title">
+                    <h2>Order</h2><h3 class="pull-right"># @Model.order.OrderID</h3>
+                </div>
+                <hr />
+                <div class="col-xs-3 text-left">
+                    <address>
+                        <strong>Shipped To:</strong><br />
+                        @(Model.order.Quote.Address.Name)<br />
+                        @(Model.order.Quote.Address.Street1)<br />
+                        @if (!string.IsNullOrEmpty(Model.order.Quote.Address.Street2))
+                        {
+                            @(Model.order.Quote.Address.Street2)<br />
+                        }
+                        @(Model.order.Quote.Address.City + ", " + Model.order.Quote.Address.State + " " + Model.order.Quote.Address.Zip)<br />
+                        @(Model.order.Quote.Address.Country)
+                    </address>
+                </div>
+                <div class="col-xs-3">
+                    <strong>Status:</strong><br />
+                    <p class="rainbow"><strong>@(Model.order.Status.ToString())</strong></p>
+                </div>
+                <div class="col-xs-3">
+                    <address>
+                        <strong>Tracking:</strong><br />
+                        @if (Model.shipment != null)
+                        {
+                            @(Model.shipment.Service)<br />
+                                @(Model.shipment.Tracking)<br />
+                                @(Model.shipment.ShipDate.ToString("g") + " -0:00 (UTC)")
+                        }
+                        else
+                        {
+                            <p>Order has no tracking information</p>
+                        }
+                    </address>
+                </div>
+                <div class="col-xs-3 text-right">
+                    <address>
+                        <strong>Order Date:</strong><br />
+                        @(Model.order.DateCreated.ToString("g") + " -0:00 (UTC)")
+                    </address>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Order Summary</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <td class="text-center"><strong>Item</strong></td>
+                                        <td class="text-center"><strong>Name</strong></td>
+                                        <td class="text-center"><strong>Size</strong></td>
+                                        <td class="text-center"><strong>Price</strong></td>
+                                        <td class="text-center"><strong>Quantity</strong></td>
+                                        <td class="text-right"><strong>Totals</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.order.Quote.Items)
+                                    {
+                                        <tr>
+                                            <td class="text-center"><img src="@Url.Content(item.Product.ProofURL)" style="height:35px;" /></td>
+                                            <td class="text-center">@(item.Product.Design.Name + " - " + item.Product.Color.Name)</td>
+                                            <td class="text-center">@(item.Size.Name)</td>
+                                            <td class="text-center">$@(item.Product.UnitPrice.ToString("0.00"))</td>
+                                            <td class="text-center">@(item.Quantity)</td>
+                                            <td class="text-right">$@(Math.Round(item.Product.UnitPrice * item.Quantity, 2, MidpointRounding.AwayFromZero).ToString("0.00"))</td>
+                                        </tr>
+                                    }
+                                    <tr>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                        <td class="thick-line text-right"><strong>$@(subtotal.ToString("0.00"))</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-center"><strong>Discount</strong></td>
+                                        <td class="no-line text-right"><strong>$@(discount.ToString("0.00"))</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-center"><strong>Shipping</strong></td>
+                                        <td class="no-line text-right"><strong>$@(Model.order.Quote.ShippingCharge.Value.ToString("0.00"))</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-center"><strong>Total</strong></td>
+                                        <td class="no-line text-right"><strong>$@(total.ToString("0.00"))</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<style type="text/css">
+    .invoice-title h2, .invoice-title h3 {
+        display: inline-block;
+    }
+
+    .table > tbody > tr > .no-line {
+        border-top: none;
+    }
+
+    .table > thead > tr > .no-line {
+        border-bottom: none;
+    }
+
+    .table > tbody > tr > .thick-line {
+        border-top: 2px solid;
+    }
+</style>

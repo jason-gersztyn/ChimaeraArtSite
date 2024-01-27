@@ -1,0 +1,152 @@
+﻿@model ChimaeraArtSiteMVC.Models.ProductSeries
+
+@{
+    ViewBag.Title = @Model.ProductSeriesName;
+}
+
+<input id="previewSelection" type="hidden" value="@Model.Products[0].ProductVariationID" />
+
+<table>
+    <tr>
+        <td class="productPreview">
+            <img id="previewItem" class="imagePreview" src="@Model.Products[0].ProofURL" />
+        </td>
+        <td class="productDetail">
+            <div>
+                <h2 id="previewName">@Model.Products[0].ImageItem.ImageName - @Model.Products[0].Color.ProductColorDisplayName</h2>
+                <p id="previewPrice">$@Model.Products[0].UnitPrice.ToString("0.00")</p>
+                <hr />
+                Size:
+                <select id="previewSizes">
+                    <option value="sml">Small</option>
+                    <option value="med">Medium</option>
+                    <option value="lrg">Large</option>
+                    <option value="xlg">Extra Large</option>
+                    <option value="xxl">2XL</option>
+                    <option value="xxxl">3XL</option>
+                </select>
+                <hr />
+                <p id="previewDescription">@Model.Products[0].ImageItem.ImageDescription</p>
+                <br />
+                <button id="btnAdd" type="button" onclick="addToCart()">ADD TO CART</button>
+            </div>
+        </td>
+    </tr>
+</table>
+
+<div style="display:block">
+    @foreach (var Product in Model.Products)
+    {
+        <a href="javascript:void(0);" onclick="@("variationSelected(" + Product.ProductVariationID + ")")" style="text-decoration:none;">
+            <div class="variationCell">
+                <img class="variationThumb" src="@Product.ProofURL" />
+                <div class="imageText">$@Product.UnitPrice.ToString("0.00")</div>
+            </div>
+        </a>
+    }
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var data = getVariationData(getSelection());
+    });
+
+    function addToCart() {
+        var id = getSelection();
+        var size = getSize();
+        var json = JSON.stringify({ ID: id, Size: size });
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Add", "Cart")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: json
+        })
+        .success(function () {
+            alert("Success");
+        })
+    }
+
+    function getSelection() {
+        var previewSelection = $("#previewSelection");
+        return previewSelection.val();
+    }
+
+    function getSize() {
+        var e = document.getElementById("previewSizes");
+        var sizeSelected = e.options[e.selectedIndex].value;
+        return sizeSelected;
+    }
+
+    function getVariationData(id) {
+        var json = JSON.stringify({ID:id});
+        $.ajax({
+            type: "POST",
+            url: '@Url.Content("~/Services/ShopServices.asmx/FetchVariationData")',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: json
+        })
+        .success(function (data) {
+            var jsdata = data.d;
+
+            var previewItem = $("#previewItem");
+            var previewName = $("#previewName");
+            var previewPrice = $("#previewPrice");
+            var previewSizes = $("#previewSizes");
+            var previewDescription = $("#previewDescription");
+
+            previewName.text(jsdata.Name);
+            previewItem.attr("src", jsdata.ProofURL);
+            previewPrice.text('$' + jsdata.UnitPrice);
+            previewSizes.empty();
+            $.each(jsdata.Sizes, function (key, value) {
+                previewSizes.append($("<option></option>").val(value).html(key))
+            });
+        });
+    }
+
+    function variationSelected(id) {
+        var previewSelection = $("#previewSelection");
+        previewSelection.val(id);
+        getVariationData(id);
+    }
+</script>
+
+<style type="text/css">
+    .imagePreview {
+	    max-width:580px;
+	    max-height:670px;
+        width:100%;
+	    display:table;
+	    clear:both;
+    }
+
+    .productDetail {
+	    width:50%;
+        padding-top:65px;
+	    vertical-align:top;
+	    text-align:left;
+    }
+
+    .productPreview {
+	    width:50%;
+    }
+
+    .variationCell {
+	    width:10%;
+	    text-align:center;
+	    display:inline-block;
+	    vertical-align:top;
+    }
+
+    .variationThumb {
+	    max-width:75px;
+        max-height:75px;
+        width:80%;
+	    clear:both;
+	    display:table;
+	    margin-left:auto;
+	    margin-right:auto;
+    }
+</style>
