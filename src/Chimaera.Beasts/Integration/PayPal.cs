@@ -101,12 +101,12 @@ namespace Chimaera.Beasts.Integration
         public static string GetPayPalAccessToken()
         {
             string ClientID = (mode == Environment.sandbox ?
-                "ARTy9lorp45zSyhnQtvYJKstGnkqORNlXazL_0ffl8blI164XHHBlHeVA3aex0ur4byEvuThuU33zQCW" : //SANDBOX
-                "AYDMFeIOCHQNXp-coIUc_Q1VHkPEjaPUdD6Hp94teg9-VlarHtiuTQBzE2C5f0tm37Uj6kSCu9e5GyWO"); //LIVE
+                "" : //SANDBOX
+                ""); //LIVE
 
             string Secret = (mode == Environment.sandbox ?
-                "EKv5bZFltlefyO4E2y-634orP1D7nHG_JLgOohDpW6rBRkK4PDsk5uklcDLscf0_11yyk6D4EdZ_IWJY" : //SANDBOX
-                "EPbGPxMUv9-WXJb_V57bZnXBnP4p0XZgFRn4jM3mE-ZHxQVtMYkvBDx46x9Rrd3b2qCwqDDVJdSf5nA1"); //LIVE
+                "" : //SANDBOX
+                ""); //LIVE
 
             Dictionary<string, string> payPalConfig = new Dictionary<string, string>();
             payPalConfig.Add("mode", mode.ToString());

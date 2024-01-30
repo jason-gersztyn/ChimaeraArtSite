@@ -25,9 +25,7 @@ namespace Chimaera.Beasts.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=chimaera.clwrghavmikk.us-west-2.rds.amazonaws.com,1433;Initial Catalo" +
-            "g=ChimaeraMVC;Persist Security Info=True;User ID=Chimaera;Password=weCedRU=r6;Mu" +
-            "ltiSubnetFailover=True;Encrypt=True;TrustServerCertificate=True;")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ChimaeraArchiveString {
             get {
                 return ((string)(this["ChimaeraArchiveString"]));
